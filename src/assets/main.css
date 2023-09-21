@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width: 768px) { 
+    .todo {
+        max-width: 90%;
+        margin-top: 4rem;
+    }
+    form{
+      display: flex;
+      margin: 4px;
+    }
+
+}

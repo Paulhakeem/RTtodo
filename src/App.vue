@@ -57,7 +57,7 @@ onSnapshot(todoQuery, (querySnapshot) => {
 
 <template>
   <div
-    class="m-auto text-center items-center mt-12 border-2 border-gray-400 rounded-md h-auto max-w-md"
+    class="todo m-auto text-center items-center mt-12 border-2 border-gray-400 rounded-md h-auto max-w-md"
   >
 
     <div class="pt-4">
@@ -77,7 +77,7 @@ onSnapshot(todoQuery, (querySnapshot) => {
        type="text"
      >
       <button 
-      class="bg-gray-500 p-2 rounded-md uppercase ml-2 text-white">
+      class="button bg-gray-500 p-2 rounded-md uppercase ml-2 text-white">
       Add Todo
     </button>
     </form>
