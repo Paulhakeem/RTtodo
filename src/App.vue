@@ -1,6 +1,6 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import { ref } from 'vue'
+import { ref, setBlockTracking } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 
 
@@ -20,6 +20,16 @@ todos.value.unshift(newTodo)
 newTodoText.value = ''
 }
 
+
+const deleteTodo = (id) => {
+todos.value = todos.value.filter(todo => todo.id !== id)
+}
+
+
+const doneTodo = (id) => {
+const index = todos.value.findIndex(todo => todo.id === id)
+todos.value[index].done = !todos.value[index].done
+}
 </script>
 
 <template>
@@ -50,13 +60,23 @@ newTodoText.value = ''
     </form>
 
 
-    <div v-for="todo in todos"
+    <div 
+    v-for="todo in todos"
     class="mx-6">
-      <div class=" flex justify-between bg-gray-100 p-2 rounded-md text-lg text-gray-500 font-medium mb-2">
+      <div  :class="{'bg-purple-200 text-purple-600 line-through': todo.done}"
+      class=" flex justify-between bg-gray-100 p-2 rounded-md text-lg text-gray-500 font-medium mb-2">
        {{todo.text}}
 
-       <button class="bg-gray-400 rounded-md p-1 text-white text-sm">Check</button>
-       <button class="bg-red-400 rounded-md p-1 text-white text-sm">Delete</button>
+       <button
+       @click="doneTodo(todo.id)"
+         :class="todo.done ? 'bg-purple-600' : 'bg-gray-400'"
+         class="bg-gray-400 rounded-md p-1 text-white text-sm">Check</button
+       >
+       <button
+       @click="deleteTodo(todo.id)" 
+       class="bg-red-400 rounded-md p-1 text-white text-sm">
+       Delete
+      </button>
       </div>
     </div>
   </div>
