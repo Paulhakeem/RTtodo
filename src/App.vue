@@ -1,41 +1,46 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import { ref, onMounted } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
 import {db} from './firebase/firestore'
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy  } from "firebase/firestore";
 
 
+
+const todoCollection = collection(db, "todos")
+const todoQuery = query(todoCollection, orderBy('date', "desc"));
 
 const todos = ref([])
-
-
 const newTodoText = ref('')
-const addTodo =() => {
-  const newTodo = {
-    id: uuidv4(),
-    text: newTodoText.value,
-    done: false,
-  }
-todos.value.unshift(newTodo)
 
+// add todo
+const addTodo =() => {
+ addDoc(todoCollection, {
+  text: newTodoText.value,
+  done: false,
+  date: Date.now()
+})
 newTodoText.value = ''
 }
 
-
+// delete todo
 const deleteTodo = (id) => {
-todos.value = todos.value.filter(todo => todo.id !== id)
+  deleteDoc(doc(todoCollection , id));
+
 }
 
-
+// done todo
 const doneTodo = (id) => {
 const index = todos.value.findIndex(todo => todo.id === id)
-todos.value[index].done = !todos.value[index].done
+// todos.value[index].done = !todos.value[index].done
+
+ updateDoc (doc(todoCollection , id), {
+  done: !todos.value[index].done
+});
 }
 
-
+// fetch todo from firestore
 onMounted(() => {
-onSnapshot(collection(db, "todos"), (querySnapshot) => {
+onSnapshot(todoQuery, (querySnapshot) => {
   const fetchTodo = [];
   querySnapshot.forEach((doc) => {
     const todo = {
