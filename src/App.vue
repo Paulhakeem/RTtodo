@@ -1,7 +1,9 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import { ref, setBlockTracking } from 'vue'
+import { ref, onMounted } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
+import {db} from './firebase/firestore'
+import { collection, onSnapshot } from "firebase/firestore";
 
 
 
@@ -30,6 +32,22 @@ const doneTodo = (id) => {
 const index = todos.value.findIndex(todo => todo.id === id)
 todos.value[index].done = !todos.value[index].done
 }
+
+
+onMounted(() => {
+onSnapshot(collection(db, "todos"), (querySnapshot) => {
+  const fetchTodo = [];
+  querySnapshot.forEach((doc) => {
+    const todo = {
+      id: doc.id,
+      text: doc.data().text,
+      done: doc.data().done,
+    }
+    fetchTodo.push(todo)
+  })
+  todos.value = fetchTodo
+})
+})
 </script>
 
 <template>
