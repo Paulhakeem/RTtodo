@@ -13,7 +13,7 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: () => About, meta: {requiresAuth: true}
     },
   ]
 })
