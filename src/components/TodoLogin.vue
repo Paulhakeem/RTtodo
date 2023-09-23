@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import { ref } from "vue"
 import { useRouter, RouterLink } from "vue-router"
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
@@ -11,12 +11,13 @@ const loginDetails = ref({
   password: '',
 });
 
+
 // password login
 const todoLogin = () => {
   signInWithEmailAndPassword(
     getAuth(),
-    loginDetails.value.email,
-    loginDetails.value.password
+    loginDetails.email.value,
+    loginDetails.password.value
   ).then(() => {
     loginDetails.value = {
       email: '',
@@ -42,6 +43,7 @@ const googleLogin = () => {
     .catch((error) => {
       alert(error.message);
     });
+console.log('hello');
 };
 
 </script>
@@ -79,6 +81,7 @@ const googleLogin = () => {
           >Your Email:</label
         >
         <input
+          v-model="loginDetails.email"
           type="email"
           placeholder="eg yourname@gmail.com"
           class="border border-gray-400 w-full p-2 rounded-md outline-none text-gray-600"
@@ -87,6 +90,7 @@ const googleLogin = () => {
           >Password:</label
         >
         <input
+        v-model="loginDetails.password"
           type="password"
           placeholder="eg 123456"
           class="border border-gray-400 w-full p-2 rounded-md outline-none text-gray-600"

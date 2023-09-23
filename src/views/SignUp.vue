@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import { ref } from "vue"
 import { useRouter, RouterLink } from "vue-router"
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
@@ -76,6 +76,7 @@ const googleLogin = () => {
           >Your Email:</label
         >
         <input
+        v-model="loginDetails.password"
           type="email"
           placeholder="eg yourname@gmail.com"
           class="border border-gray-400 w-full p-2 rounded-md outline-none text-gray-600"
@@ -84,6 +85,7 @@ const googleLogin = () => {
           >Password:</label
         >
         <input
+        v-model="loginDetails.password"
           type="password"
           placeholder="eg 123456"
           class="border border-gray-400 w-full p-2 rounded-md outline-none text-gray-600"
@@ -107,8 +109,10 @@ const googleLogin = () => {
       class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer"
       @click="googleLogin"
       >Google</button>
-      <button class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer">Facebok</button>
-      <button class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer">Github</button>
+      <button 
+      class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer">Facebok</button>
+      <button 
+      class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer">Github</button>
     </div>
   </div>
 </template>
