@@ -49,8 +49,16 @@
       <div class="w-full h-[1px] bg-gray-300 "></div>
       </div>
 
-      <div class="my-6">
-paul
+      <div class="my-6 flex gap-4 justify-center text-center items-center">
+       <div class="border border-gray-400 rounded-md p-2 w-32">
+        google
+       </div>
+       <div class="border border-gray-400 rounded-md p-2 w-32">
+        facebok
+       </div>
+       <div class="border border-gray-400 rounded-md p-2 w-32">
+        Github
+       </div>
       </div>
     </div>
 </template>
