@@ -54,7 +54,7 @@ console.log('hello');
   >
     <div class="my-4">
       <h1 class="text-gray-500 text-2xl font-medium tracking-wide">
-        Create an account
+        Login to your todo account
       </h1>
       <p class="text-md font-light text-gray-400">To acces your todos or 
         <span class="underline font-bold cursor-pointer">
