@@ -1,7 +1,7 @@
 <script>
 import { ref } from "vue"
 import { useRouter, RouterLink } from "vue-router"
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 
 const router = useRouter()
 const google = new GoogleAuthProvider()
@@ -13,7 +13,7 @@ const loginDetails = ref({
 
 // password login
 const todoLogin = () => {
-  signInWithEmailAndPassword(
+    createUserWithEmailAndPassword(
     getAuth(),
     loginDetails.value.email,
     loginDetails.value.password
@@ -56,10 +56,7 @@ const googleLogin = () => {
       </h1>
       <p class="text-md font-light text-gray-400">To acces your todos or 
         <span class="underline font-bold cursor-pointer">
-        <RouterLink to="/sign">
-            signup
-        </RouterLink>
-
+            Login
         </span>
     </p>
       <hr class="text-gray-300 my-3 mx-4" />
