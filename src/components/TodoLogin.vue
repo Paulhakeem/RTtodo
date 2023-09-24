@@ -1,16 +1,21 @@
 <script setup>
-import { ref } from "vue"
-import { useRouter, RouterLink } from "vue-router"
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { ref } from "vue";
+import { useRouter, RouterLink } from "vue-router";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "firebase/auth";
 
-const router = useRouter()
-const google = new GoogleAuthProvider()
+const router = useRouter();
+const google = new GoogleAuthProvider();
 
 const loginDetails = ref({
-  email: '',
-  password: '',
+  email: "",
+  password: "",
 });
-
 
 // password login
 const todoLogin = () => {
@@ -18,19 +23,20 @@ const todoLogin = () => {
     getAuth(),
     loginDetails.email.value,
     loginDetails.password.value
-  ).then(() => {
-    loginDetails.value = {
-      email: '',
-      password: '',
-    }
-    router.push({
-        path: '/about'
+  )
+    .then(() => {
+      loginDetails.value = {
+        email: "",
+        password: "",
+      };
+      router.push({
+        path: "/about",
+      });
     })
-  })
-  .catch(error => {
-    alert(error.message)
-  })
-}
+    .catch((error) => {
+      alert(error.message);
+    });
+};
 
 // google login
 const googleLogin = () => {
@@ -43,9 +49,8 @@ const googleLogin = () => {
     .catch((error) => {
       alert(error.message);
     });
-console.log('hello');
+  console.log("hello");
 };
-
 </script>
 
 <template>
@@ -56,14 +61,12 @@ console.log('hello');
       <h1 class="text-gray-500 text-2xl font-medium tracking-wide">
         Login to your todo account
       </h1>
-      <p class="text-md font-light text-gray-400">To acces your todos or 
+      <p class="text-md font-light text-gray-400">
+        To acces your todos or
         <span class="underline font-bold cursor-pointer">
-        <RouterLink to="/sign">
-            signup
-        </RouterLink>
-
+          <RouterLink to="/sign"> signup </RouterLink>
         </span>
-    </p>
+      </p>
       <hr class="text-gray-300 my-3 mx-4" />
     </div>
     <!-- login form -->
@@ -90,7 +93,7 @@ console.log('hello');
           >Password:</label
         >
         <input
-        v-model="loginDetails.password"
+          v-model="loginDetails.password"
           type="password"
           placeholder="eg 123456"
           class="border border-gray-400 w-full p-2 rounded-md outline-none text-gray-600"
@@ -110,12 +113,18 @@ console.log('hello');
     </div>
 
     <div class="my-6 flex gap-4 justify-center text-center items-center mb-6">
-      <button 
-      class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer"
-      @click="googleLogin"
-      >Google</button>
-      <button class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer">Facebok</button>
-      <button class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer">Github</button>
+      <button
+        class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer"
+        @click="googleLogin"
+      >
+        Google
+      </button>
+      <button class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer">
+        Facebok
+      </button>
+      <button class="border border-gray-400 rounded-md p-2 w-32 cursor-pointer">
+        Github
+      </button>
     </div>
   </div>
 </template>

@@ -85,9 +85,9 @@ onSnapshot(todoQuery, (querySnapshot) => {
 
     <div 
     v-for="todo in todos"
-    class="mx-6">
+    class="mx-6 gap-4">
       <div  :class="{'bg-purple-200 text-purple-600 line-through': todo.done}"
-      class=" flex justify-between bg-gray-100 p-2 rounded-md text-lg text-gray-500 font-medium mb-2">
+      class=" flex justify-between bg-gray-100 p-2 rounded-md text-lg text-gray-500 font-medium mb-2 gap-4 text-left">
        {{todo.text}}
 
        <button
