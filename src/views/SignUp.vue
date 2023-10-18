@@ -76,7 +76,7 @@ const googleLogin = () => {
           >Your Email:</label
         >
         <input
-        v-model="loginDetails.password"
+          v-model="loginDetails.password"
           type="email"
           placeholder="eg yourname@gmail.com"
           class="border border-gray-400 w-full p-2 rounded-md outline-none text-gray-600"
